@@ -7,7 +7,7 @@ function OrderDisplayPage() {
 
   return (
     <Container>
-      <h1>Order List</h1>
+      <h1>Order List:</h1>
       <List>
         {orders.map(order => (
           <ListItem key={order.id}>
@@ -24,6 +24,7 @@ function OrderDisplayPage() {
         ))}
       </List>
     </Container>
+
   );
 }
 

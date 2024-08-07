@@ -1,34 +1,51 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-const OrderContext = createContext();
-
-export const useOrder = () => {
-  return useContext(OrderContext);
-};
+export const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
-  const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [currentOrder, setCurrentOrder] = useState({
+        customerName: '',
+        pizzas: [],
+    });
 
-  useEffect(() => {
-    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-    setOrders(savedOrders);
-  }, []);
+    const addPizza = (pizza) => {
+        setCurrentOrder((prevOrder) => ({
+            ...prevOrder,
+            pizzas: [...prevOrder.pizzas, pizza],
+        }));
+    };
 
-  useEffect(() => {
-    localStorage.setItem('orders', JSON.stringify(orders));
-  }, [orders]);
+    const updatePizza = (index, updatedPizza) => {
+        const newPizzas = [...currentOrder.pizzas];
+        newPizzas[index] = updatedPizza;
+        setCurrentOrder((prevOrder) => ({
+            ...prevOrder,
+            pizzas: newPizzas,
+        }));
+    };
 
-  const addOrder = (order) => {
-    setOrders([...orders, order]);
-  };
+    const deletePizza = (index) => {
+        const newPizzas = [...currentOrder.pizzas];
+        newPizzas.splice(index, 1);
+        setCurrentOrder((prevOrder) => ({
+            ...prevOrder,
+            pizzas: newPizzas,
+        }));
+    };
 
-  const removeOrder = (orderId) => {
-    setOrders(orders.filter(order => order.id !== orderId));
-  };
+    const submitOrder = () => {
+        setOrders([...orders, currentOrder]);
+        setCurrentOrder({
+            customerName: '',
+            pizzas: [],
+        });
+    };
 
-  return (
-    <OrderContext.Provider value={{ orders, addOrder, removeOrder }}>
-      {children}
-    </OrderContext.Provider>
-  );
+    return (
+        <OrderContext.Provider value={{ orders, currentOrder, setCurrentOrder, addPizza, updatePizza, deletePizza, submitOrder }}>
+            {children}
+        </OrderContext.Provider>
+    );
 };
+export const useOrder = () => useContext(OrderContext);

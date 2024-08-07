@@ -8,6 +8,7 @@ import OrderPage from './pages/OrderPage';
 import PizzaEditingPage from './pages/PizzaEditingPage';
 import AboutPage from './pages/AboutPage'
 import { OrderProvider } from './context/OrderContext';
+import Footer from './components/Footer';
 
 
 
@@ -22,10 +23,11 @@ function App() {
         <Route path="/order display" element={<OrderDisplayPage />} />
         <Route path="/order management" element={<OrderManagementPage />} />
         <Route path="/my order" element={<OrderPage />} />
-        <Route path="/edit pizza" element={<PizzaEditingPage />} />
+        <Route path="/edit-pizza/:pizzaName" element={<PizzaEditingPage />} />
         <Route path="/about" element={<AboutPage />} />
 
       </Routes>
+      <Footer />
     </div>
     </OrderProvider>
     </Router>

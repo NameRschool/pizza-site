@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useOrder } from '../context/OrderContext';
 import { TextField, Button, Container, MenuItem, Select, FormControl, InputLabel, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 
-function AddOrder() {
+function AddOrder(name, type) {
   const { addOrder } = useOrder();
   const [customerName, setCustomerName] = useState('');
   const [pizzaType, setPizzaType] = useState('');
@@ -34,9 +34,8 @@ function AddOrder() {
       date: new Date().toLocaleDateString()
     };
     addOrder(newOrder);
-    // ניקוי הטפסים
-    setCustomerName('');
-    setPizzaType('');
+    setCustomerName(name);
+    setPizzaType(type);
     setSize('');
     setToppings({
       cheese: false,
@@ -50,24 +49,6 @@ function AddOrder() {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        <TextField
-          label="Customer Name"
-          value={customerName}
-          onChange={(e) => setCustomerName(e.target.value)}
-          required
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Pizza Type"
-          value={pizzaType}
-          onChange={(e) => setPizzaType(e.target.value)}
-          required
-          fullWidth
-          margin="normal"
-        />
-        
-        {/* תיבת בחירה עבור גודל הפיצה */}
         <FormControl fullWidth margin="normal">
           <InputLabel>Size</InputLabel>
           <Select
@@ -82,7 +63,6 @@ function AddOrder() {
           </Select>
         </FormControl>
 
-        {/* תיבות סימון עבור תוספות */}
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={toppings.cheese} onChange={handleToppingChange} name="cheese" />}

@@ -15,7 +15,7 @@ function Header() {
         </Typography>
         <Button color="inherit" component={Link} to="/">HomePage</Button>
         <Button color="inherit" component={Link} to="/my order">My Order</Button>
-        <Button color="inherit" component={Link} to="/edit pizza">Edit Pizza</Button>
+        {/* <Button color="inherit" component={Link} to="/edit pizza">Edit Pizza</Button> */}
         <Button color="inherit" component={Link} to="/order display">Order Display</Button>
         <Button color="inherit" component={Link} to="/order management">Order Management</Button>
         <Button color="inherit" component={Link} to="/about">about</Button>
