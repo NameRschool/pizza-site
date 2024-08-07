@@ -22,8 +22,7 @@ const handleSubmit = () => {
 };
 
 const customerOrders = orders.filter(order => order.customerName === customerName);
-console.log('Current Order:', currentOrder);
-console.log('Customer Orders:', customerOrders); 
+
 
   const pizzaTypes = [
     {

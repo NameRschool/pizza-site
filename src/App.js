@@ -9,11 +9,14 @@ import PizzaEditingPage from './pages/PizzaEditingPage';
 import AboutPage from './pages/AboutPage'
 import { OrderProvider } from './context/OrderContext';
 import Footer from './components/Footer';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 
 
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
     <Router>
             <OrderProvider>
     <div>
@@ -31,6 +34,7 @@ function App() {
     </div>
     </OrderProvider>
     </Router>
+    </ThemeProvider>
   );
 }
 

@@ -36,14 +36,15 @@ function PizzaEditingPage() {
     const handleCancelClick = () => {
         alert("cancel");
         navigate('/my order');
-
     };
+
     const handleSaveClick = () => {
         alert("save");
         const updatedPizza = { size, toppings, quantity };
+        console.log(pizzaName,size, toppings,quantity)
+        console.log(index,updatedPizza.quantity)
         updatePizza(index, updatedPizza);
         navigate('/my order');
-
     };
     return (
         <Container>

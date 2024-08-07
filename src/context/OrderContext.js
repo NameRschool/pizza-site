@@ -10,6 +10,7 @@ export const OrderProvider = ({ children }) => {
     });
 
     const addPizza = (pizza) => {
+        console.log(pizza)
         setCurrentOrder((prevOrder) => ({
             ...prevOrder,
             pizzas: [...prevOrder.pizzas, pizza],
@@ -17,12 +18,11 @@ export const OrderProvider = ({ children }) => {
     };
 
     const updatePizza = (index, updatedPizza) => {
+        console.log(index+"updatedPizza")
         const newPizzas = [...currentOrder.pizzas];
         newPizzas[index] = updatedPizza;
-        setCurrentOrder((prevOrder) => ({
-            ...prevOrder,
-            pizzas: newPizzas,
-        }));
+        console.log(newPizzas[index]+"updatedPizza")
+        setCurrentOrder({ ...currentOrder, pizzas: newPizzas });
     };
 
     const deletePizza = (index) => {
@@ -38,7 +38,10 @@ export const OrderProvider = ({ children }) => {
         setOrders([...orders, currentOrder]);
         setCurrentOrder({
             customerName: '',
-            pizzas: [],
+            pizzas: [{
+                type:"",
+                size:""
+            }],
         });
     };
 

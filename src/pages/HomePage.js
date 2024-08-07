@@ -2,6 +2,8 @@ import img from '../image/logo.jpg'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import '../styles/HomePage.css';
+
 function HomePage() {
   const navigate = useNavigate();
   const handleClick = () => {
@@ -9,13 +11,14 @@ function HomePage() {
   };
   return (
     <>
-      <div>
-        <h1>hi</h1>
+      <div className="image-container">
+        <img src={img} alt="logo" className="image" />
+        <Button className="button" onClick={handleClick}>
+          <AddCircleOutlineIcon />
+        </Button>
       </div>
-      <img src={img} alt="logo" className="d-block w-100" />
-      <Button onClick={handleClick}>
-        <AddCircleOutlineIcon />
-      </Button>
+
+
     </>
   );
 }
