@@ -44,12 +44,12 @@ function OrderPage() {
   ];
 
   const handleButtonClick = (name, index) => {
-    addOrder(customerName, name,index);
+    const newPizzaIndex = currentOrder.pizzas.length;
+    addOrder(customerName, name,);
     console.log(customerName, name + "form")
     console.log('Pizza type:', name);
-console.log('Index:', index);
-
-    navigate(`/edit-pizza/${encodeURIComponent(name)}/${index}`);
+    console.log('Index:', index);
+    navigate(`/edit-pizza/${encodeURIComponent(name)}/${newPizzaIndex}`);
   };
 
   // const handleOrderSubmit = () => {
@@ -64,7 +64,6 @@ console.log('Index:', index);
         value={customerName}
         onChange={(e) => {
           setCustomerName(e.target.value);
-          setIndex(index + 1);
         }}
         fullWidth
       />
@@ -78,8 +77,8 @@ console.log('Index:', index);
           title={pizza.type}
           text={pizza.size}
           buttonText="edit"
-          onButtonClick={() => navigate(`/edit-pizza/${encodeURIComponent(pizza.type)}/${index}`)}
-          />
+          onButtonClick={() => navigate(`/edit-pizza/${encodeURIComponent(pizza.type)}/${pizza.index}`)}
+        />
       ))}
 
       {/* <button onClick={() => navigate('/edit-pizza')}>Add Pizza</button> */}
@@ -127,7 +126,7 @@ console.log('Index:', index);
           title={pizza.name}
           text={pizza.description}
           buttonText="edit"
-          onButtonClick={() => handleButtonClick(pizza.name,index)}
+          onButtonClick={() => handleButtonClick(pizza.name, (index+1))}
           />
       ))}
 

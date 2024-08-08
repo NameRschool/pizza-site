@@ -6,17 +6,16 @@ export const OrderProvider = ({ children }) => {
     const [orders, setOrders] = useState([]);
     const [currentOrder, setCurrentOrder] = useState({
         customerName: '',
-        pizzas: [],
+        pizzas: [{type:'', size:'',toppings:[],quantity:1}],
     });
 
-    const addOrder = (customerName, pizza,index) => {
-        console.log(customerName, pizza + " cont");
-    
+    const addOrder = (customerName, pizza) => {
         setCurrentOrder(prevOrder => ({
             customerName,
-            pizzas: [...prevOrder.pizzas, { type: pizza }],
+            pizzas: [...prevOrder.pizzas, { type: pizza, size: '', toppings: [], quantity: 1 }],
         }));
     };
+    
 
     
     const addPizza = (pizza) => {
@@ -28,13 +27,12 @@ export const OrderProvider = ({ children }) => {
     };
     
 
-    const updatePizza = ( updatedPizza,index) => {
-        console.log(index+"updatedPizza")
+    const updatePizza = (updatedPizza, index) => {
         const newPizzas = [...currentOrder.pizzas];
-        newPizzas[index] = updatedPizza;
-        console.log(newPizzas[index]+"updatedPizza")
+        newPizzas[index] = { ...newPizzas[index], ...updatedPizza };
         setCurrentOrder({ ...currentOrder, pizzas: newPizzas });
     };
+    
     // const updatePizza = ( updatedPizza,index) => {
     //     const newPizzas = [...currentOrder.pizzas];
     //     newPizzas[index] = { ...newPizzas[index], ...updatedPizza };

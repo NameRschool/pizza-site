@@ -19,17 +19,31 @@ function PizzaEditingPage() {
     const [quantity, setQuantity] = useState(1);
 
 
+    // useEffect(() => {
+    //     if (pizzaIndex !== undefined) {
+    //         console.log('Pizza Index:', pizzaIndex);
+    //         console.log('Pizzas:', currentOrder.pizzas);
+    //         const pizza = currentOrder.pizzas[pizzaIndex];
+    //         setSize(pizza.size);
+    //         setToppings(pizza.toppings);
+    //         setQuantity(pizza.quantity);
+    //     }
+    // }, [pizzaIndex, currentOrder.pizzas]);
+
     useEffect(() => {
-        if (pizzaIndex !== undefined) {
-            console.log('Pizza Index:', pizzaIndex);
-            console.log('Pizzas:', currentOrder.pizzas);
+        if (pizzaIndex !== undefined && currentOrder.pizzas[pizzaIndex]) {
             const pizza = currentOrder.pizzas[pizzaIndex];
-            setSize(pizza.size);
-            setToppings(pizza.toppings);
-            setQuantity(pizza.quantity);
+            setSize(pizza.size || '');  // Use default value if undefined
+            setToppings(pizza.toppings || {
+                cheese: false,
+                pepperoni: false,
+                mushrooms: false,
+                onions: false,
+            });
+            setQuantity(pizza.quantity || 1);
         }
     }, [pizzaIndex, currentOrder.pizzas]);
-
+    
     const handleToppingChange = (e) => {
         setToppings({ ...toppings, [e.target.name]: e.target.checked });
     };
@@ -44,7 +58,7 @@ function PizzaEditingPage() {
         alert("save");
         const updatedPizza = { size, toppings, quantity };
         console.log(pizzaIndex,updatedPizza.quantity)
-        updatePizza(updatedPizza, pizzaIndex,);
+        updatePizza(updatedPizza, pizzaIndex);
         navigate('/my order');
     };
     return (
