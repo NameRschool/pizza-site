@@ -26,7 +26,7 @@ function App() {
         <Route path="/order display" element={<OrderDisplayPage />} />
         <Route path="/order management" element={<OrderManagementPage />} />
         <Route path="/my order" element={<OrderPage />} />
-        <Route path="/edit-pizza/:pizzaName" element={<PizzaEditingPage />} />
+        <Route path="/edit-pizza/:pizzaName/:index" element={<PizzaEditingPage />} />
         <Route path="/about" element={<AboutPage />} />
 
       </Routes>

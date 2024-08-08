@@ -9,22 +9,38 @@ export const OrderProvider = ({ children }) => {
         pizzas: [],
     });
 
-    const addPizza = (pizza) => {
-        console.log(pizza)
-        setCurrentOrder((prevOrder) => ({
-            ...prevOrder,
-            pizzas: [...prevOrder.pizzas, pizza],
+    const addOrder = (customerName, pizza,index) => {
+        console.log(customerName, pizza + " cont");
+    
+        setCurrentOrder(prevOrder => ({
+            customerName,
+            pizzas: [...prevOrder.pizzas, { type: pizza }],
         }));
     };
 
-    const updatePizza = (index, updatedPizza) => {
+    
+    const addPizza = (pizza) => {
+        console.log(pizza+"add pizza")
+        setCurrentOrder((prevOrder) => ({
+            ...prevOrder.customerName,
+            pizzas: [...prevOrder.pizzas, pizza],
+        }));
+    };
+    
+
+    const updatePizza = ( updatedPizza,index) => {
         console.log(index+"updatedPizza")
         const newPizzas = [...currentOrder.pizzas];
         newPizzas[index] = updatedPizza;
         console.log(newPizzas[index]+"updatedPizza")
         setCurrentOrder({ ...currentOrder, pizzas: newPizzas });
     };
-
+    // const updatePizza = ( updatedPizza,index) => {
+    //     const newPizzas = [...currentOrder.pizzas];
+    //     newPizzas[index] = { ...newPizzas[index], ...updatedPizza };
+    //     setCurrentOrder({ ...currentOrder, pizzas: newPizzas });
+    // };
+    
     const deletePizza = (index) => {
         const newPizzas = [...currentOrder.pizzas];
         newPizzas.splice(index, 1);
@@ -46,7 +62,7 @@ export const OrderProvider = ({ children }) => {
     };
 
     return (
-        <OrderContext.Provider value={{ orders, currentOrder, setCurrentOrder, addPizza, updatePizza, deletePizza, submitOrder }}>
+        <OrderContext.Provider value={{ orders, currentOrder, setCurrentOrder,addOrder, addPizza, updatePizza, deletePizza, submitOrder }}>
             {children}
         </OrderContext.Provider>
     );

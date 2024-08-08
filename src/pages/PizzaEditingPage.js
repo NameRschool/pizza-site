@@ -4,10 +4,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Container, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, TextField, Button } from '@mui/material';
 
 function PizzaEditingPage() {
-    const { index } = useParams();
-    const { pizzaName } = useParams();
-
+    const { pizzaName,index } = useParams();
+    const decodedPizzaType = decodeURIComponent(pizzaName);
     const navigate = useNavigate();
+    const pizzaIndex = parseInt(index, 10);
     const { currentOrder, updatePizza } = useContext(OrderContext);
     const [size, setSize] = useState('');
     const [toppings, setToppings] = useState({
@@ -20,13 +20,15 @@ function PizzaEditingPage() {
 
 
     useEffect(() => {
-        if (index !== undefined) {
-            const pizza = currentOrder.pizzas[index];
+        if (pizzaIndex !== undefined) {
+            console.log('Pizza Index:', pizzaIndex);
+            console.log('Pizzas:', currentOrder.pizzas);
+            const pizza = currentOrder.pizzas[pizzaIndex];
             setSize(pizza.size);
             setToppings(pizza.toppings);
             setQuantity(pizza.quantity);
         }
-    }, [index, currentOrder.pizzas]);
+    }, [pizzaIndex, currentOrder.pizzas]);
 
     const handleToppingChange = (e) => {
         setToppings({ ...toppings, [e.target.name]: e.target.checked });
@@ -41,14 +43,13 @@ function PizzaEditingPage() {
     const handleSaveClick = () => {
         alert("save");
         const updatedPizza = { size, toppings, quantity };
-        console.log(pizzaName,size, toppings,quantity)
-        console.log(index,updatedPizza.quantity)
-        updatePizza(index, updatedPizza);
+        console.log(pizzaIndex,updatedPizza.quantity)
+        updatePizza(updatedPizza, pizzaIndex,);
         navigate('/my order');
     };
     return (
         <Container>
-            <h1>עריכת פיצה: {pizzaName}</h1>
+            <h1>עריכת פיצה: {decodedPizzaType}</h1>
             <form >
                 <FormControl fullWidth margin="normal">
                     <InputLabel>Size</InputLabel>
