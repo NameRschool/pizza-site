@@ -7,8 +7,9 @@ import '../styles/HomePage.css';
 function HomePage() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/my order');
+    navigate('/order');
   };
+
   return (
     <>
       <div className="image-container">

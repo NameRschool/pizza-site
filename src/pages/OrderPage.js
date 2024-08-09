@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 import { Button, TextField, List, ListItem, ListItemText } from '@mui/material';
 import GenericCard from '../components/GenericCard';
 
 const OrderPage = () => {
   const context = useContext(OrderContext);
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   const pizzaTypes = [
     {
       image: 'https://via.placeholder.com/150',
@@ -27,10 +27,9 @@ const OrderPage = () => {
   const { currentOrder, setCurrentOrder, addOrder } = context;
 
   useEffect(() => {
-    console.log('Current Order:', currentOrder);
   }, [currentOrder]);
   if (!context) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
 
@@ -38,7 +37,7 @@ const OrderPage = () => {
     navigate(`/edit-pizza/${encodeURIComponent(pizza)}`);
   };
 
-  const handleEditPizza = (id,pizza) => {
+  const handleEditPizza = (id, pizza) => {
     navigate(`/edit-pizza/${id}/${encodeURIComponent(pizza)}`);
   };
 
@@ -47,11 +46,11 @@ const OrderPage = () => {
     setCurrentOrder({ customerName: '', pizzas: [] });
   };
 
- 
+
 
   return (
     <div>
-            <TextField
+      <TextField
         label="Customer Name"
         value={currentOrder.customerName}
         onChange={(e) => setCurrentOrder({ ...currentOrder, customerName: e.target.value })}
@@ -72,7 +71,7 @@ const OrderPage = () => {
         currentOrder.pizzas.map((pizza) => (
           <GenericCard
             key={pizza.id}
-            image="path_to_pizza_image" 
+            image="path_to_pizza_image"
             title={`Pizza ${pizza.name}`}
             text={`Size: ${pizza.size}\nToppings: ${pizza.toppings.join(', ')}`}
             buttonText="Edit Pizza"
@@ -87,7 +86,7 @@ const OrderPage = () => {
         {currentOrder.pizzas.map((pizza) => (
           <ListItem key={pizza.id}>
             <ListItemText primary={`Pizza ${pizza.id}: ${pizza.size}`} />
-            <Button onClick={() => handleEditPizza(pizza.id,pizza.name)} variant="contained">Edit</Button>
+            <Button onClick={() => handleEditPizza(pizza.id, pizza.name)} variant="contained">Edit</Button>
           </ListItem>
         ))}
       </List>

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { useHistory, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 import { Button, List, ListItem, ListItemText } from '@mui/material';
 
 const OrderDisplayPage = () => {
   const { id } = useParams();
   const { orders, setOrders } = useContext(OrderContext);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const order = orders[id];
 
   const handleConfirm = () => {

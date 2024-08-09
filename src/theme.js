@@ -9,7 +9,6 @@ const theme = createTheme({
     secondary: {
       main: '#A48669', 
     },
-    // הגדר צבעים נוספים כמו error, warning, info וכו'
   },
 
 });

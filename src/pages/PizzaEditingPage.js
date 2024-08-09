@@ -35,6 +35,8 @@ const PizzaEditingPage = () => {
     //         : [...prevPizza.toppings, topping],
     //     }));
     //   };
+
+    
     const handleToppingChange = (e) => {
         const { name, value, checked } = e.target;
         if (name === 'size') {
@@ -71,9 +73,9 @@ const PizzaEditingPage = () => {
                         key={topping}
                         control={
                             <Checkbox
-                                name={`topping-${topping}`} // השתמש בשם תואם
+                                name={`topping-${topping}`}    
                                 checked={pizza.toppings.includes(topping)}
-                                onChange={handleToppingChange} // העבר את הפונקציה ישירות
+                                onChange={handleToppingChange}     
                             />
                         }
                         label={topping}
