@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import '../styles/HomePage.css';
 
+
 function HomePage() {
   const navigate = useNavigate();
   const handleClick = () => {
