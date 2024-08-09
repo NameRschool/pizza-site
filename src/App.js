@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Home from './pages/HomePage';
+import HomePage from './pages/HomePage';
 import OrderDisplayPage from './pages/OrderDisplayPage';
 import OrderManagementPage from './pages/OrderManagementPage';
 import OrderPage from './pages/OrderPage';
@@ -17,23 +17,34 @@ import theme from './theme';
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    <Router>
+      <div>
+        <Header /> 
+
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/order" element={<OrderPage />} />
+          <Route path="/edit-pizza" element={<PizzaEditingPage />} />
+          <Route path="/order-management" element={<OrderManagementPage />} />
+          <Route path="/order-display/:orderId" element={<OrderDisplayPage />} />
+        </Routes>
+
+        <Footer /> 
+      </div>
+      {/* <Router>
             <OrderProvider>
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/order display" element={<OrderDisplayPage />} />
-        <Route path="/order management" element={<OrderManagementPage />} />
-        <Route path="/my order" element={<OrderPage />} />
-        <Route path="/edit-pizza/:pizzaName/:index" element={<PizzaEditingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-
-      </Routes>
+      <Route path="/order" element={<OrderPage />} />
+      <Route path="/edit-pizza" element={<PizzaEditingPage />} />
+      <Route path="/order-management" element={<OrderManagementPage />} />
+      <Route path="/order-display/:orderId" element={<OrderDisplayPage />} />
+    </Routes>
       <Footer />
     </div>
     </OrderProvider>
-    </Router>
+    </Router> */}
     </ThemeProvider>
   );
 }

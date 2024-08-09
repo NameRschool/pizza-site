@@ -1,42 +1,28 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Typography, Card, CardContent, Button, Grid } from '@mui/material';
 import { OrderContext } from '../context/OrderContext';
+import { List, ListItem, ListItemText, Button } from '@mui/material';
 
-function OrderManagementPage() {
-  const navigate = useNavigate();
+const OrderManagementPage = () => {
   const { orders } = useContext(OrderContext);
+  const navigate = useNavigate(); 
 
-  const handleOrderClick = (orderId) => {
-    navigate(`/order display/${orderId}`);
-  };
+  const handleViewOrder = (id) => {
+    navigate(`/order-display/${id}`);  };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Order Management
-      </Typography>
-      <Grid container spacing={3}>
+    <div>
+      <h2>Order Management</h2>
+      <List>
         {orders.map((order, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6">Order {index + 1}</Typography>
-                <Typography variant="body2">Customer: {order.customerName}</Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => handleOrderClick(index)}
-                >
-                  View Details
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
+          <ListItem key={index}>
+            <ListItemText primary={`Order #${index + 1}: ${order.customerName}`} />
+            <Button onClick={() => handleViewOrder(index)} variant="contained">View</Button>
+          </ListItem>
         ))}
-      </Grid>
-    </Container>
+      </List>
+    </div>
   );
-}
+};
 
 export default OrderManagementPage;
