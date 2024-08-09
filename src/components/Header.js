@@ -13,8 +13,8 @@ function Header() {
           </Link>
         </Typography>
         <Button color="inherit" component={Link} to="/">HomePage</Button>
-        <Button color="inherit" component={Link} to="/my order">My Order</Button>
-        <Button color="inherit" component={Link} to="/order management">Order Management</Button>
+        <Button color="inherit" component={Link} to="/order">My Order</Button>
+        <Button color="inherit" component={Link} to="/order-management">Order Management</Button>
         <Button color="inherit" component={Link} to="/about">about</Button>
 
       </Toolbar>
