@@ -63,7 +63,7 @@ const OrderPage = () => {
           <GenericCard
             key={pizza.id}
             image="path_to_pizza_image"
-            title={`Pizza ${pizza.name}`}
+            title={`Pizza ${pizzaTypes.filter(p => p.id == pizza.pizzaTypeId).name}`}
             text={`Size: ${pizza.size}\nToppings: ${pizza.toppings.join(', ')}`}
             buttonText="Edit Pizza"
             onButtonClick={() => handleEditPizza(pizza.id)}
@@ -72,7 +72,7 @@ const OrderPage = () => {
       ) : (
         <div>No pizzas in the order.</div>
       )}
-      <Button onClick={handleAddPizza} variant="contained" color="primary">Add Pizza</Button>
+      {/* <Button onClick={handleAddPizza} variant="contained" color="primary">Add Pizza</Button>
       <List>
         {currentOrder.pizzas.map((pizza) => (
           <ListItem key={pizza.id}>
@@ -80,7 +80,7 @@ const OrderPage = () => {
             <Button onClick={() => handleEditPizza(pizza.id, pizza.name)} variant="contained">Edit</Button>
           </ListItem>
         ))}
-      </List>
+      </List> */}
       <Button onClick={handleSubmitOrder} variant="contained" color="secondary">Submit Order</Button>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
-import { Button, FormControl, InputLabel, MenuItem, Select, Checkbox, FormControlLabel } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, Checkbox, FormControlLabel, TextField } from '@mui/material';
 import pizzaTypes from '../types';
 
 const PizzaEditingPage = () => {
@@ -61,7 +61,7 @@ const PizzaEditingPage = () => {
 
     return (
         <div>
-            <h2>Edit Pizza {JSON.stringify(pizzaType)}</h2>
+            <h2>Edit Pizza {JSON.stringify(pizzaType.name)}</h2>
             <FormControl fullWidth>
                 <InputLabel>Size</InputLabel>
                 <Select
@@ -88,6 +88,8 @@ const PizzaEditingPage = () => {
                     />
                 ))}
             </div>
+            {/* quantity  */}
+
             <Button onClick={handleSave} variant="contained" color="primary">Save</Button>
             <Button onClick={handleCancel} variant="contained">Cancel</Button>
         </div>
