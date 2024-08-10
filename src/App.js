@@ -25,8 +25,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/edit-pizza" element={<PizzaEditingPage />} />
-          <Route path="/edit-pizza/:name" element={<PizzaEditingPage />} />
-
+          <Route path="/edit-pizza/:id" element={<PizzaEditingPage />} />
           <Route path="/order-management" element={<OrderManagementPage />} />
           <Route path="/order-display/:orderId" element={<OrderDisplayPage />} />
         </Routes>

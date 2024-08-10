@@ -3,14 +3,28 @@ import React, { createContext, useState } from 'react';
 export const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
+    let currentPizzaId = 1;
+    //submitted orders
     const [orders, setOrders] = useState([]);
+    //be submit
     const [currentOrder, setCurrentOrder] = useState({
         customerName: '',
-        pizzas: [],
+        pizzas: [
+        ],
     });
 
     const addOrder = (order) => {
         setOrders([...orders, order]);
+    };
+
+    //edit
+    const updateCurrentOrder = (pizzaType) => {
+        setCurrentOrder((prevOrder) => ({
+            ...prevOrder,
+            pizzas: [...prevOrder.pizzas, { id: currentPizzaId, pizzaTypeId: pizzaType, size: '', toppings: [], quantity: 1 }]
+
+        }));
+        return currentPizzaId++;
     };
 
     const updatePizza = (id, updatedPizza) => {
@@ -33,7 +47,7 @@ export const OrderProvider = ({ children }) => {
 
     return (
         <OrderContext.Provider
-            value={{ orders, currentOrder, setCurrentOrder, addOrder, addPizza, updatePizza }}
+            value={{ orders, currentOrder, setCurrentOrder, updateCurrentOrder, addOrder, addPizza, updatePizza }}
         >
             {children}
         </OrderContext.Provider>

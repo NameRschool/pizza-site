@@ -3,27 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 import { Button, TextField, List, ListItem, ListItemText } from '@mui/material';
 import GenericCard from '../components/GenericCard';
+import pizzaTypes from '../types';
 
 const OrderPage = () => {
   const context = useContext(OrderContext);
+  const { updateCurrentOrder  } = useContext(OrderContext);
+
   const navigate = useNavigate();
-  const pizzaTypes = [
-    {
-      image: 'https://via.placeholder.com/150',
-      name: 'פיצה מרגריטה',
-      description: 'קלאסית והכי מוצלחת',
-    },
-    {
-      image: 'https://via.placeholder.com/150',
-      name: 'פיצה פרווה',
-      description: 'שווה ומפנקת במיוחד',
-    },
-    {
-      image: 'https://via.placeholder.com/150',
-      name: 'פיצה ללא גלוטן',
-      description: 'טעימה כמו רגילה',
-    }
-  ];
+ 
+
   const { currentOrder, setCurrentOrder, addOrder } = context;
 
   useEffect(() => {
@@ -34,11 +22,12 @@ const OrderPage = () => {
 
 
   const handleAddPizza = (pizza) => {
-    navigate(`/edit-pizza/${encodeURIComponent(pizza)}`);
+    const newPizzaId = updateCurrentOrder(pizza)
+    navigate(`/edit-pizza/${newPizzaId}`);
   };
 
-  const handleEditPizza = (id, pizza) => {
-    navigate(`/edit-pizza/${id}/${encodeURIComponent(pizza)}`);
+  const handleEditPizza = (id) => {
+    navigate(`/edit-pizza/${id}`);
   };
 
   const handleSubmitOrder = () => {
@@ -64,9 +53,10 @@ const OrderPage = () => {
           title={pizza.name}
           text={pizza.description}
           buttonText="edit"
-          onButtonClick={() => handleAddPizza(pizza.name)}
+          onButtonClick={() => handleAddPizza(pizza.id)}
         />
       ))}
+
       <h2>Order Page</h2>
       {currentOrder.pizzas.length > 0 ? (
         currentOrder.pizzas.map((pizza) => (

@@ -1,22 +1,28 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 import { Button, FormControl, InputLabel, MenuItem, Select, Checkbox, FormControlLabel } from '@mui/material';
+import pizzaTypes from '../types';
 
 const PizzaEditingPage = () => {
-    const { id, name } = useParams();
-    const pizzaType = decodeURIComponent(name);
+    console.log("pizzaTypes", pizzaTypes);
 
-    const { currentOrder, updatePizza } = useContext(OrderContext);
-    const [pizza, setPizza] = useState({ id: id || Date.now(), size: '', toppings: [] });
+    let { id } = useParams();
+    id = Number(id);
+    const context = useContext(OrderContext);
+    const { currentOrder, updatePizza } = context;
+
+    const currentPizza = currentOrder.pizzas.filter(p => p.id === id)[0];
+    const pizzaType = pizzaTypes.filter(p => p.id === currentPizza.pizzaTypeId)[0];
+    const [pizza, setPizza] = useState(currentPizza);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (id) {
-            const pizzaToEdit = currentOrder.pizzas.find((p) => p.id === parseInt(id));
-            if (pizzaToEdit) setPizza(pizzaToEdit);
-        }
-    }, [id, currentOrder]);
+    // useEffect(() => {
+    //     if (id) {
+    //         const pizzaToEdit = currentOrder.pizzas.find((p) => p.id === parseInt(id));
+    //         if (pizzaToEdit) setPizza(pizzaToEdit);
+    //     }
+    // }, [id, currentOrder]);
 
     const handleSave = () => {
         updatePizza(pizza.id, pizza);
@@ -36,26 +42,26 @@ const PizzaEditingPage = () => {
     //     }));
     //   };
 
-    
+
     const handleToppingChange = (e) => {
         const { name, value, checked } = e.target;
         if (name === 'size') {
-          setPizza(prevPizza => ({ ...prevPizza, size: value }));
+            setPizza(prevPizza => ({ ...prevPizza, size: value }));
         } else if (name.startsWith('topping')) {
-          const topping = name.replace('topping-', '');
-          setPizza(prevPizza => ({
-            ...prevPizza,
-            toppings: checked
-              ? [...prevPizza.toppings, topping]
-              : prevPizza.toppings.filter(t => t !== topping)
-          }));
+            const topping = name.replace('topping-', '');
+            setPizza(prevPizza => ({
+                ...prevPizza,
+                toppings: checked
+                    ? [...prevPizza.toppings, topping]
+                    : prevPizza.toppings.filter(t => t !== topping)
+            }));
         }
-      };
-      
+    };
+
 
     return (
         <div>
-            <h2>Edit Pizza {pizzaType}</h2>
+            <h2>Edit Pizza {JSON.stringify(pizzaType)}</h2>
             <FormControl fullWidth>
                 <InputLabel>Size</InputLabel>
                 <Select
@@ -73,9 +79,9 @@ const PizzaEditingPage = () => {
                         key={topping}
                         control={
                             <Checkbox
-                                name={`topping-${topping}`}    
+                                name={`topping-${topping}`}
                                 checked={pizza.toppings.includes(topping)}
-                                onChange={handleToppingChange}     
+                                onChange={handleToppingChange}
                             />
                         }
                         label={topping}
