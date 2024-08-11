@@ -59,10 +59,15 @@ export const OrderProvider = ({ children }) => {
         }));
     };
 
+    // remove an order from the submitted orders
+    const removeOrder = (id) => {
+        setOrders(orders.filter((order) => order.id !== id));
+    };
+
 
     return (
         <OrderContext.Provider
-            value={{ orders, currentOrder, setCurrentOrder, updateCurrentOrder, addOrder, addPizza, updatePizza, removePizza }}
+            value={{ orders, currentOrder, setCurrentOrder, updateCurrentOrder, addOrder, addPizza, updatePizza, removePizza, removeOrder }}
         >
             {children}
         </OrderContext.Provider>

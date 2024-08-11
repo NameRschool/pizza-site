@@ -6,14 +6,16 @@ import pizzaTypes from '../types';
 
 
 const OrderDisplayPage = () => {
-  const { orderId  } = useParams();
+  const { orderId } = useParams();
   const id = Number(orderId);
-  const { orders, setOrders } = useContext(OrderContext);
+  const { orders, setOrders, removeOrder } = useContext(OrderContext);
   const navigate = useNavigate();
   const order = orders.filter(order => order.id === id)[0];
 
   const handleConfirm = () => {
-    setOrders(orders.filter((order) => order.id !== id));
+    console.log(orders)
+    removeOrder(id);
+   // setOrders(orders.filter((order) => order.id !== id));
     navigate('/manage-orders');
   };
 
