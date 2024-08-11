@@ -14,9 +14,11 @@ function HomePage() {
     <>
       <div className="image-container">
         <img src={img} alt="logo" className="image" />
-        <Button className="button" onClick={handleClick}>
+
+        <Button className="floating-button" onClick={handleClick}>
           <AddCircleOutlineIcon />
         </Button>
+
       </div>
 
 

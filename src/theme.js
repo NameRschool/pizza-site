@@ -56,8 +56,23 @@ const theme = createTheme({
       fontSize: '0.875rem',
       fontWeight: 400,
     },
-    button: {
-      fontWeight: 500,
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          position: 'fixed',
+          bottom: '2rem',
+          right: '2rem',
+          borderRadius: '50%',
+          width: '60px',
+          height: '60px',
+          boxShadow: '0 4px 8px rgba(255, 255, 255, 0.5)', // צל לבן
+          backgroundColor: '#BA3F1D',
+          color: '#ffffff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+      },
     },
     },
       components: {
@@ -65,6 +80,31 @@ const theme = createTheme({
       styleOverrides: {
         title: {
           fontWeight: 700, 
+        },
+      },
+    },
+  },
+  MuiTextField: {
+    styleOverrides: {
+      root: {
+        width: '100%', 
+      },
+    },
+  },
+  MuiInputBase: {
+    styleOverrides: {
+      root: {
+        '&.Mui-focused': {
+          backgroundColor: '#ffffff', 
+        },
+      },
+    },
+  },
+  MuiOutlinedInput: {
+    styleOverrides: {
+      root: {
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: '#BA3F1D', 
         },
       },
     },
