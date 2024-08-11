@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# 🍕 Pizza Ordering Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+This project is a pizza ordering website built with React. It allows customers to create and manage their pizza orders and provides an administrative interface for managing these orders.
 
-## Available Scripts
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Pages](#pages)
+  - [Order Page](#order-page)
+  - [Pizza Editing Page](#pizza-editing-page)
+  - [Order Management Page](#order-management-page)
+  - [Order Display Page](#order-display-page)
+- [Technical Details](#technical-details)
+- [Contributing](#contributing)
+- [License](#license)
 
-In the project directory, you can run:
+## Features
+- Customers can create and edit pizza orders.
+- Admins can manage and confirm orders.
+- Responsive design using Material-UI (MUI).
+- State management with React hooks.
+- Data persistence using Context or local storage.
 
-### `npm start`
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/pizza-ordering-website.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd pizza-ordering-website
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Usage
+- Open your browser and navigate to `http://localhost:3000`.
+- Use the website to place, edit, and manage pizza orders.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Pages
 
-### `npm test`
+### Order Page
+- **Functionality:**
+  - Add a new pizza to the order.
+  - Edit an existing pizza.
+  - Submit the order.
+- **Form Fields:**
+  - Customer Name (Text field).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pizza Editing Page
+- **Functionality:**
+  - Select pizza size.
+  - Choose toppings.
+  - Save or cancel edits.
 
-### `npm run build`
+### Order Management Page
+- **Functionality:**
+  - View all orders.
+  - Navigate to specific order details.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Order Display Page
+- **Functionality:**
+  - View order details including customer name and pizza information.
+  - Confirm and remove the order from the management list.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technical Details
+- **React**: Functional components and hooks (`useState`, `useEffect`).
+- **State Management**: Context API or local storage.
+- **UI Framework**: Material-UI (MUI).
+- **Routing**: React Router.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contributing
+Contributions are welcome! Please feel free to submit a pull request or open an issue if you have suggestions for improvement.
 
-### `npm run eject`
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
