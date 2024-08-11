@@ -13,9 +13,7 @@ const OrderDisplayPage = () => {
   const order = orders.filter(order => order.id === id)[0];
 
   const handleConfirm = () => {
-    console.log(orders)
     removeOrder(id);
-   // setOrders(orders.filter((order) => order.id !== id));
     navigate('/manage-orders');
   };
 
