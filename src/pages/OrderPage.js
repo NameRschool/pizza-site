@@ -95,7 +95,7 @@ const OrderPage = () => {
             currentOrder.pizzas.map((pizza) => (
               <GenericCard
                 key={pizza.id}
-                image="path_to_pizza_image"
+                image={pizzaTypes.filter(p => p.id == pizza.pizzaTypeId)[0].image}
                 title={`Pizza ${pizzaTypes.filter(p => p.id == pizza.pizzaTypeId)[0].name}`}
                 text={`Size: ${pizza.size}\nToppings: ${pizza.toppings.length ? pizza.toppings.join(', ') : 'no toppings'}\nQuantity: ${pizza.quantity}`}
                 buttonText="Edit Pizza"

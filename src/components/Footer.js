@@ -17,11 +17,11 @@ const Footer = () => {
     >
       <Container maxWidth="sm">
         <Typography variant="body1">
-          החברה שלך © {new Date().getFullYear()}
+          Pizza Shop© {new Date().getFullYear()}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          <Link color="inherit" href="https://yourwebsite.com">
-            אתר החברה
+          <Link color="inherit" href="contact@pizzashop.com">
+            Pizza Shop
           </Link>
         </Typography>
       </Container>
