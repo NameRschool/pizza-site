@@ -1,18 +1,28 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 import { Button, TextField, List, ListItem, ListItemText } from '@mui/material';
 import GenericCard from '../components/GenericCard';
 import pizzaTypes from '../types';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Snackbar from '@mui/material/Snackbar';
 
 const OrderPage = () => {
-  const context = useContext(OrderContext);
-  const { updateCurrentOrder  } = useContext(OrderContext);
-
   const navigate = useNavigate();
- 
+  const context = useContext(OrderContext);
+  const { updateCurrentOrder } = useContext(OrderContext);
+  const { currentOrder, setCurrentOrder, addOrder, removePizza } = context;
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setShowError(false);
+  };
 
-  const { currentOrder, setCurrentOrder, addOrder } = context;
+
 
   useEffect(() => {
   }, [currentOrder]);
@@ -30,7 +40,13 @@ const OrderPage = () => {
     navigate(`/edit-pizza/${id}`);
   };
 
-  const handleSubmitOrder = () => {
+  const handleSubmitOrder = (e) => {
+    e.preventDefault();
+    if (!currentOrder.pizzas.length) {
+      setErrorMessage("Your order is empty. Add Pizzas to your order!");
+      setShowError(true);
+      return;
+    }
     addOrder(currentOrder);
     setCurrentOrder({ customerName: '', pizzas: [] });
   };
@@ -39,49 +55,61 @@ const OrderPage = () => {
 
   return (
     <div>
+      <Snackbar open={showError} onClose={handleCloseSnackBar} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+        <Alert
+          onClose={handleCloseSnackBar}
+          severity="warning"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {errorMessage}
+        </Alert>
+      </Snackbar>
       <br></br>
-      <TextField
-        label="Customer Name"
-        value={currentOrder.customerName}
-        onChange={(e) => setCurrentOrder({ ...currentOrder, customerName: e.target.value })}
-        fullWidth
-      />
-      <h2>Pizza</h2>
-      {pizzaTypes.map((pizza) => (
-        <GenericCard
-          image={pizza.image}
-          title={pizza.name}
-          text={pizza.description}
-          buttonText="edit"
-          onButtonClick={() => handleAddPizza(pizza.id)}
+      <form onSubmit={handleSubmitOrder}>
+        <TextField
+          label="Customer Name"
+          value={currentOrder.customerName}
+          onChange={(e) => setCurrentOrder({ ...currentOrder, customerName: e.target.value })}
+          fullWidth
+          required
         />
-      ))}
+        <h2>Pizza</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {pizzaTypes.map((pizza) => (
+            <GenericCard
+              key={pizza.id}
+              image={pizza.image}
+              title={pizza.name}
+              text={pizza.description}
+              buttonText="edit"
+              onButtonClick={() => handleAddPizza(pizza.id)}
+            />
+          ))}
+        </div>
 
-      <h2>Order Page</h2>
-      {currentOrder.pizzas.length > 0 ? (
-        currentOrder.pizzas.map((pizza) => (
-          <GenericCard
-            key={pizza.id}
-            image="path_to_pizza_image"
-            title={`Pizza ${pizzaTypes.filter(p => p.id == pizza.pizzaTypeId).name}`}
-            text={`Size: ${pizza.size}\nToppings: ${pizza.toppings.join(', ')}`}
-            buttonText="Edit Pizza"
-            onButtonClick={() => handleEditPizza(pizza.id)}
-          />
-        ))
-      ) : (
-        <div>No pizzas in the order.</div>
-      )}
-      {/* <Button onClick={handleAddPizza} variant="contained" color="primary">Add Pizza</Button>
-      <List>
-        {currentOrder.pizzas.map((pizza) => (
-          <ListItem key={pizza.id}>
-            <ListItemText primary={`Pizza ${pizza.id}: ${pizza.size}`} />
-            <Button onClick={() => handleEditPizza(pizza.id, pizza.name)} variant="contained">Edit</Button>
-          </ListItem>
-        ))}
-      </List> */}
-      <Button onClick={handleSubmitOrder} variant="contained" color="secondary">Submit Order</Button>
+        <h2>Order Page</h2>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {currentOrder.pizzas.length > 0 ? (
+            currentOrder.pizzas.map((pizza) => (
+              <GenericCard
+                key={pizza.id}
+                image="path_to_pizza_image"
+                title={`Pizza ${pizzaTypes.filter(p => p.id == pizza.pizzaTypeId)[0].name}`}
+                text={`Size: ${pizza.size}\nToppings: ${pizza.toppings.length ? pizza.toppings.join(', ') : 'no toppings'}\nQuantity: ${pizza.quantity}`}
+                buttonText="Edit Pizza"
+                onButtonClick={() => handleEditPizza(pizza.id)}
+                showRemove={true}
+                onRemoveClick={() => { removePizza(pizza.id) }}
+              />
+            ))
+          ) : (
+            <h2 style={{ textAlign: 'center' }}>No pizzas in the order.</h2>
+          )}
+        </div>
+        <Button variant="contained" color="secondary" type='submit'>Submit Order</Button>
+      </form>
     </div>
   );
 };

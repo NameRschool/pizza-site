@@ -1,23 +1,27 @@
 import React, { createContext, useState } from 'react';
-
 export const OrderContext = createContext();
 
+let currentOrderId = 1;
+let currentPizzaId = 1;
+
 export const OrderProvider = ({ children }) => {
-    let currentPizzaId = 1;
     //submitted orders
     const [orders, setOrders] = useState([]);
-    //be submit
+
+    //befor submit
     const [currentOrder, setCurrentOrder] = useState({
         customerName: '',
         pizzas: [
         ],
     });
 
+    //add a order to the submited order list
     const addOrder = (order) => {
+        order.id = currentOrderId++;
         setOrders([...orders, order]);
     };
 
-    //edit
+    //edit a current order
     const updateCurrentOrder = (pizzaType) => {
         setCurrentOrder((prevOrder) => ({
             ...prevOrder,
@@ -27,6 +31,7 @@ export const OrderProvider = ({ children }) => {
         return currentPizzaId++;
     };
 
+    //update a singhl pizza in the current order
     const updatePizza = (id, updatedPizza) => {
         setCurrentOrder((prevOrder) => ({
             ...prevOrder,
@@ -36,6 +41,7 @@ export const OrderProvider = ({ children }) => {
         }));
     };
 
+    // add a pizza to the current order
     const addPizza = (pizza) => {
         setCurrentOrder(prevOrder => ({
             ...prevOrder,
@@ -43,11 +49,20 @@ export const OrderProvider = ({ children }) => {
         }));
     };
 
+    // remove a pizza frome the current order
+    const removePizza = (id) => {
+        setCurrentOrder((prevOrder) => ({
+            ...prevOrder,
+            pizzas: prevOrder.pizzas.filter((pizza) =>
+                pizza.id !== id
+            ),
+        }));
+    };
 
 
     return (
         <OrderContext.Provider
-            value={{ orders, currentOrder, setCurrentOrder, updateCurrentOrder, addOrder, addPizza, updatePizza }}
+            value={{ orders, currentOrder, setCurrentOrder, updateCurrentOrder, addOrder, addPizza, updatePizza, removePizza }}
         >
             {children}
         </OrderContext.Provider>
