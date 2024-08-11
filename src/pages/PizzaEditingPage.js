@@ -14,7 +14,8 @@ import {
     FormControlLabel,
     Checkbox,
     Grid,
-} from '@mui/material'; import pizzaTypes from '../types';
+} from '@mui/material';
+ import pizzaTypes from '../types';
 
 const PizzaEditingPage = () => {
 
@@ -35,6 +36,7 @@ const PizzaEditingPage = () => {
     };
 
     const handleCancel = () => {
+        console.log(currentPizza)
         if (pizza.isNew) {
             removePizza(pizza.id)
         }

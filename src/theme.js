@@ -65,7 +65,7 @@ const theme = createTheme({
           borderRadius: '50%',
           width: '60px',
           height: '60px',
-          boxShadow: '0 4px 8px rgba(255, 255, 255, 0.5)', // צל לבן
+          boxShadow: '0 4px 8px rgba(255, 255, 255, 0.5)',
           backgroundColor: '#BA3F1D',
           color: '#ffffff',
           display: 'flex',
