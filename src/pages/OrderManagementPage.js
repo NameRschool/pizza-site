@@ -14,10 +14,10 @@ const OrderManagementPage = () => {
     <div>
       <h2>Order Management</h2>
       <List>
-        {orders.map((order, index) => (
-          <ListItem key={index}>
-            <ListItemText primary={`Order #${index + 1}: ${order.customerName}`} />
-            <Button onClick={() => handleViewOrder(index)} variant="contained">View</Button>
+        {orders.map((order) => (
+          <ListItem key={order.id}>
+            <ListItemText primary={`Order #${order.id}: ${order.customerName}`} />
+            <Button onClick={() => handleViewOrder(order.id)} variant="contained">View</Button>
           </ListItem>
         ))}
       </List>
