@@ -25,7 +25,7 @@ export const OrderProvider = ({ children }) => {
     const updateCurrentOrder = (pizzaType) => {
         setCurrentOrder((prevOrder) => ({
             ...prevOrder,
-            pizzas: [...prevOrder.pizzas, { id: currentPizzaId, pizzaTypeId: pizzaType, size: '', toppings: [], quantity: 1 }]
+            pizzas: [...prevOrder.pizzas, { id: currentPizzaId, pizzaTypeId: pizzaType, size: 'medium', toppings: [], quantity: 1,isNew: true }]
 
         }));
         return currentPizzaId++;
