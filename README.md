@@ -58,7 +58,3 @@ Ejecting gives you full control over the build configuration, but it’s irrever
 - [React Documentation](https://reactjs.org/)
 
 ## Enjoy Your Pizza! 🍕
-
----
-
-Feel free to adjust any details to better match your project’s specifics.
