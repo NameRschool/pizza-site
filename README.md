@@ -2,6 +2,10 @@
 
 This project is a fun and interactive pizza ordering web application built with [Create React App](https://github.com/NameRschool/pizza-site). Our app allows you to customize your pizza experience from start to finish!
 
+## 🌐 Live Demo
+
+You can check out the live version of the application at https://pizza-site-u3qf.onrender.com. Explore the features and try out the pizza ordering experience!
+
 ## 🎉 Project Features
 
 ### 🍕 Pizza Options
